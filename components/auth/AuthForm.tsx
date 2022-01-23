@@ -54,10 +54,10 @@ const AuthForm = ({ form, onFinish, onFinishFailed }: Props) => {
       form={form}
     >
       <Form.Item label="Username" name="username">
-        <Input style={{ width: "70vh" }} />
+        <Input style={{ width: "200%" }} />
       </Form.Item>
       <Form.Item label="password" name="password">
-        <Input.Password style={{ width: "70vh" }} />
+        <Input.Password style={{ width: "200%" }} />
       </Form.Item>
       {/* <Button type="primary" icon={<PoweroffOutlined />} loading /> */}
     </Form>

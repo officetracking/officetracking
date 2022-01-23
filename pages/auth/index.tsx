@@ -117,41 +117,38 @@ const AuthIndex: NextPage = () => {
                 margin: "auto",
               }}
             >
-              <div className="content" style={{ textAlign: "center" }}>
-                <AuthForm
-                  form={form}
-                  onFinish={onFormFinish}
-                  onFinishFailed={onFormFinish}
+              <AuthForm
+                form={form}
+                onFinish={onFormFinish}
+                onFinishFailed={onFormFinish}
+              />
+              {isError ? (
+                <Alert
+                  message={`${isErrorMessage}`}
+                  type="error"
+                  style={{ width: "100%", marginBottom: 20 }}
                 />
-                {isError ? (
-                  <Alert
-                    message={`${isErrorMessage}`}
-                    type="error"
-                    style={{ width: "70vh", marginBottom: 20 }}
-                  />
-                ) : (
-                  ""
-                )}
+              ) : (
+                ""
+              )}
 
-                <Row>
-                  <Col>
-                    {isLoading ? (
-                      <Spin indicator={antIcon} style={{ width: "70vh" }} />
-                    ) : (
-                      <Button
-                        style={{ width: "70vh" }}
-                        type="primary"
-                        onClick={() => {
-                          onSubmitForm(form);
-                        }}
-                        disabled={isLoading}
-                      >
-                        Sign In
-                      </Button>
-                    )}
-                  </Col>
-                </Row>
-              </div>
+              {isLoading ? (
+                <Spin
+                  indicator={antIcon}
+                  style={{ width: "100%", margin: "auto" }}
+                />
+              ) : (
+                <Button
+                  style={{ width: "100%" }}
+                  type="primary"
+                  onClick={() => {
+                    onSubmitForm(form);
+                  }}
+                  disabled={isLoading}
+                >
+                  Sign In
+                </Button>
+              )}
             </Card>
           </div>
         </div>
