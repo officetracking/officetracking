@@ -3,8 +3,6 @@ import {
   Card,
   Form,
   Button,
-  Row,
-  Col,
   FormInstance,
   Typography,
   Spin,
@@ -47,7 +45,7 @@ const AuthIndex: NextPage = () => {
               setIsError(false);
               setIsErrorMessage("");
               sessionStorage.setItem("isLogin", "true");
-              router.push("/dashboard");
+              router.push("/home");
             } else {
               setIsError(true);
               setIsErrorMessage("Akun ini tidak aktif");
@@ -76,7 +74,7 @@ const AuthIndex: NextPage = () => {
   useEffect(() => {
     const isLogin = sessionStorage.getItem("isLogin");
     if (isLogin == "true") {
-      router.push("/dashboard");
+      router.push("/home");
     }
   });
   return (

@@ -7,6 +7,8 @@ import {
   Form,
   Row,
   Col,
+  Image,
+  Upload,
 } from "antd";
 import Head from "next/head";
 import PageLayout from "../../components/layouts/Layout";
@@ -18,12 +20,15 @@ import { FormInstance } from "rc-field-form";
 import _merge from "lodash/merge";
 import axios from "axios";
 import EmployeeForm from "../../components/employees/EmployeeForm";
+
 const { Content } = Layout;
 
 const EmployeeCreate: NextPage = () => {
   const router = useRouter();
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const { Dragger } = Upload;
 
   const onFormFinish = (values: any) => {
     sendData(values);
@@ -43,6 +48,8 @@ const EmployeeCreate: NextPage = () => {
         password: requestObject.password,
         username: requestObject.username,
         access: requestObject.access,
+        email: requestObject.email,
+        divisi: requestObject.jobdesk,
         latitude: "0",
         longitude: "0",
         is_tracking: false,

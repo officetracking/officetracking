@@ -33,6 +33,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import ButtonGroup from "antd/lib/button/button-group";
 
 const { Content } = Layout;
 
@@ -63,10 +64,27 @@ const EmployeeIndex: NextPage = () => {
       render: (text: any) => <Avatar size="large" icon={<UserOutlined />} />,
     },
     {
+      title: "NIK",
+      dataIndex: "code",
+      key: "code",
+      render: (text: any) => <a>{text}</a>,
+    },
+    {
       title: "Name",
       dataIndex: "name",
       key: "name",
       render: (text: any) => <a>{text}</a>,
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+      render: (text: any) => <a>{text}</a>,
+    },
+    {
+      title: "Divisi",
+      dataIndex: "divisi",
+      key: "divisi",
     },
 
     {
@@ -75,10 +93,11 @@ const EmployeeIndex: NextPage = () => {
       key: "address",
     },
     {
-      title: "jobdesk",
-      dataIndex: "jobdesk",
-      key: "address",
+      title: "Telepon",
+      dataIndex: "phone",
+      key: "phone",
     },
+
     {
       title: "status",
       key: "is_active",
@@ -128,6 +147,7 @@ const EmployeeIndex: NextPage = () => {
                       jobdesk: record.jobdesk,
                       username: record.username,
                       phone: record.phone,
+                      email: record.email,
                     },
                   });
                 }}
@@ -147,6 +167,7 @@ const EmployeeIndex: NextPage = () => {
       title: "Are you sure?",
       text: "Data Akan Dihapus",
       icon: "warning",
+
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {

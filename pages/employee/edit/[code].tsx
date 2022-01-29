@@ -27,8 +27,17 @@ function EmployeeEdit() {
   const [isLoading, setIsLoading] = useState(false);
   const [employee, setEmployee] = useState([]);
 
-  const { code, name, address, access, is_active, username, phone, jobdesk } =
-    router.query;
+  const {
+    code,
+    name,
+    address,
+    access,
+    is_active,
+    username,
+    phone,
+    jobdesk,
+    email,
+  } = router.query;
 
   const onFormFinish = (values: any) => {
     console.log(values);
@@ -48,6 +57,8 @@ function EmployeeEdit() {
         password: requestObject.password,
         username: requestObject.username,
         access: requestObject.access,
+        email: requestObject.email,
+        divisi: requestObject.jobdesk,
 
         slug: requestObject.code,
         is_active: requestObject.is_active,
@@ -160,6 +171,7 @@ function EmployeeEdit() {
                       access={access}
                       is_active={is_active}
                       jobdesk={jobdesk}
+                      email={email}
                       form={form}
                       onFinish={onFormFinish}
                       // onFinishFailed={() =>
