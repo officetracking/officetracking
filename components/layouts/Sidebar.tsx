@@ -7,10 +7,10 @@ import Link from "next/link";
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
-const rootSubmenuKeys = ["dashboard"];
+const rootSubmenuKeys = ["home"];
 
 const LayoutSider = () => {
-  const [openKeys, setOpenKeys] = useState(["dashboard"]);
+  const [openKeys, setOpenKeys] = useState(["home"]);
   const router = useRouter();
 
   const onOpenChange = (keys: any[]) => {
@@ -40,20 +40,31 @@ const LayoutSider = () => {
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={["dashboard_dashboard"]}
+        defaultSelectedKeys={["home_home"]}
         style={{ paddingTop: "calc(63px + 10px)" }}
         openKeys={openKeys}
         onOpenChange={onOpenChange}
       >
-        <SubMenu key="dashboard" icon={<ShopOutlined />} title="Dashboard">
-          <Menu.Item key="dashboard_dashboard">
-            <Link href="/dashboard">
-              <a>Dashboard</a>
+        <SubMenu key="home" icon={<ShopOutlined />} title="Home">
+          <Menu.Item key="home_home">
+            <Link href="/home">
+              <a>Home</a>
             </Link>
           </Menu.Item>
-          <Menu.Item key="employee_employee" title="employee">
+          <Menu.Item key="employee_employee" title="Data Karyawan">
             <Link href="/employee">
-              <a>Employee</a>
+              <a>Data Karyawan</a>
+            </Link>
+          </Menu.Item>
+          <Menu.Item
+            title="Logout"
+            onClick={() => {
+              sessionStorage.clear();
+              router.push("/auth");
+            }}
+          >
+            <Link href="#">
+              <a>Logout</a>
             </Link>
           </Menu.Item>
         </SubMenu>

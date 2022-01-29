@@ -63,6 +63,7 @@ const EmployeeFormEdit = ({
   password,
   access,
   is_active,
+  email,
 }: any) => {
   useEffect(() => {}, []);
   return (
@@ -80,8 +81,9 @@ const EmployeeFormEdit = ({
       {/* personal information */}
       <Title level={4}>Informasi Pribadi</Title>
       <Form.Item
-        label="kode Pegawai"
+        label="NIK"
         name="code"
+        initialValue={code}
         rules={[
           {
             required: true,
@@ -89,12 +91,13 @@ const EmployeeFormEdit = ({
           },
         ]}
       >
-        <Input defaultValue={code} />
+        <Input defaultValue={code} value={code} disabled={true} />
         {/* disabled={code == null ? false : true} */}
       </Form.Item>
       <Form.Item
         label="Nama"
         name="name"
+        initialValue={name}
         rules={[
           {
             required: true,
@@ -105,8 +108,22 @@ const EmployeeFormEdit = ({
         <Input value={name} defaultValue={name} />
       </Form.Item>
       <Form.Item
-        label="Jobdesk"
+        label="Email"
+        name="email"
+        initialValue={email}
+        rules={[
+          {
+            required: true,
+            message: "Masukkan jobdesk Email",
+          },
+        ]}
+      >
+        <Input defaultValue={email} />
+      </Form.Item>
+      <Form.Item
+        label="Divisi"
         name="jobdesk"
+        initialValue={jobdesk}
         rules={[
           {
             required: true,
@@ -125,6 +142,7 @@ const EmployeeFormEdit = ({
       <Form.Item
         label="Telepon"
         name="phone"
+        initialValue={phone}
         rules={[
           {
             required: true,
@@ -137,6 +155,7 @@ const EmployeeFormEdit = ({
       <Form.Item
         label="Alamat"
         name="address"
+        initialValue={address}
         rules={[
           {
             required: true,
@@ -151,6 +170,7 @@ const EmployeeFormEdit = ({
       <Form.Item
         label="Username"
         name="username"
+        initialValue={username}
         rules={[
           {
             required: true,
@@ -163,18 +183,19 @@ const EmployeeFormEdit = ({
       <Form.Item
         label="password"
         name="password"
-        rules={[
-          {
-            required: true,
-            message: "Masukan Password!",
-          },
-        ]}
+        // rules={[
+        //   {
+        //     required: true,
+        //     message: "Masukan Password!",
+        //   },
+        // ]}
       >
         <Input.Password defaultValue={password} />
       </Form.Item>
       <Form.Item
         label="Akses"
         name="access"
+        initialValue={access}
         rules={[
           {
             required: true,
@@ -195,6 +216,7 @@ const EmployeeFormEdit = ({
       <Form.Item
         label="Status"
         name="is_active"
+        initialValue={is_active}
         rules={[
           {
             required: true,

@@ -5,7 +5,7 @@ import { Drawer, Button, Space } from "antd";
 import "jspdf-autotable";
 import jsPDF from "jspdf";
 import axios from "axios";
-import History from "../../components/checkin/History";
+import History from "../checkin/History";
 const DashboardM = (props) => {
   const mapDispatch = useDispatchMap();
   const [mapViewport, setMapViewport] = useState({
@@ -33,7 +33,7 @@ const DashboardM = (props) => {
   };
 
   const checkinHistory = async (code) => {
-    let response = await axios.get(`/api/checkin`);
+    let response = await axios.get(`/api/checkin/${code}`);
     setCheckin([...response.data.entriesData]);
     //console.log("historu checkin", response.data.entriesData);
   };
@@ -71,13 +71,14 @@ const DashboardM = (props) => {
           longitude={parseFloat(city.longitude)}
           latitude={parseFloat(city.latitude)}
           onClick={() => {
-            checkinHistory(city.code);
             // console.log(city);
             // setEmployee(city);
             // setEmployeeName()
             setEmployeeName(city.name);
+            console.log(city.name);
             setEmployeeCode(city.code);
             setEmployeeCurrentAddress(city.current_address);
+            checkinHistory(city.code);
 
             showDrawer();
           }}
@@ -96,21 +97,26 @@ const DashboardM = (props) => {
     //await checkinHistory(employeeCode);
     var pdf = [];
     var doc = new jsPDF("p", "px", "a4");
-    doc.text(`Riwayat Checkin ${employeeName} `, 10, 20);
+    doc.setFontSize(15);
+    doc.text(`Riwayat Checkin  `, 10, 20);
+    doc.setFontSize(10);
+    doc.text(`NIK :${employeeCode} `, 10, 35);
+    doc.setFontSize(10);
+    doc.text(`Nama :${employeeName} `, 10, 50);
+    doc.setMa;
 
-    doc.autoTable({ html: "#my-table" });
+    doc.autoTable({ html: "#my-table", margin: { top: 50 } });
     checkin.map((value) => {
       var data = [
         // dateFormat(value.date, "dd/mm/yyyy"),
-        value.date,
-        value.time,
-        value.current_address,
+        `${value.date} ${value.time}`,
+        `${value.latitude},${value.longitude}`,
       ];
       pdf.push(data);
     });
 
     doc.autoTable({
-      margin: { top: 20 },
+      margin: { top: 50 },
       headStyles: {
         fillColor: "#3498db",
         textColor: [255, 255, 255],
@@ -118,21 +124,20 @@ const DashboardM = (props) => {
         padding: 0,
       },
       columnStyles: {
-        0: { cellWidth: 50 },
+        0: { cellWidth: 100 },
 
-        1: { cellWidth: 70, halign: "left" },
         2: { cellWidth: 300, halign: "left" },
       },
       thema: "grid",
-      margin: { left: 10, right: 10 },
-      head: [["Tanggal", "Waktu", "Lokasi checkin"]],
+      margin: { left: 10, right: 10, top: 100 },
+      head: [["Timestamp", "Kordinat"]],
       body: pdf,
     });
     window.open(doc.output("bloburl"), "_blank");
   };
 
   useEffect(() => {
-    checkinHistory();
+    // checkinHistory();
   }, []);
   return (
     <ReactMapGL

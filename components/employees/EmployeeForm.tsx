@@ -6,10 +6,14 @@ import {
   message,
   Typography,
   Select,
+  Image,
+  Upload,
+  Button,
 } from "antd";
 import axios from "axios";
 import { database } from "firebase-admin";
 import { ReactNode, useEffect, useState } from "react";
+import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
 
 interface IInformation {
   account_name: string;
@@ -49,6 +53,25 @@ const options1 = [
 function handleChange(value: any) {
   console.log(`Selected: ${value}`);
 }
+const p = {
+  name: "file",
+  multiple: true,
+  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+  onChange(info: any) {
+    const { status } = info.file;
+    if (status !== "uploading") {
+      console.log(info.file, info.fileList);
+    }
+    if (status === "done") {
+      message.success(`${info.file.name} file uploaded successfully.`);
+    } else if (status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+  onDrop(e: any) {
+    console.log("Dropped files", e.dataTransfer.files);
+  },
+};
 
 const EmployeeForm = ({
   form,
@@ -79,8 +102,9 @@ const EmployeeForm = ({
     >
       {/* personal information */}
       <Title level={4}>Informasi Pribadi</Title>
+
       <Form.Item
-        label="kode Pegawai"
+        label="NIK"
         name="code"
         rules={[
           {
@@ -91,6 +115,7 @@ const EmployeeForm = ({
       >
         <Input defaultValue={code} disabled={code == null ? false : true} />
       </Form.Item>
+
       <Form.Item
         label="Nama"
         name="name"
@@ -104,7 +129,19 @@ const EmployeeForm = ({
         <Input value={name} defaultValue={name} />
       </Form.Item>
       <Form.Item
-        label="Jobdesk"
+        label="Email"
+        name="email"
+        rules={[
+          {
+            required: true,
+            message: "Masukkan jobdesk Email",
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        label="Divisi"
         name="jobdesk"
         rules={[
           {
@@ -186,7 +223,7 @@ const EmployeeForm = ({
           {options}
         </Select>
       </Form.Item>
-      <Form.Item
+      {/* <Form.Item
         label="Status"
         name="is_active"
         rules={[
@@ -195,8 +232,8 @@ const EmployeeForm = ({
             message: "Pilih Status",
           },
         ]}
-      >
-        <Select
+      > */}
+      {/* <Select
           size="middle"
           defaultValue={is_active}
           placeholder="Please select"
@@ -204,8 +241,8 @@ const EmployeeForm = ({
           style={{ width: "100%" }}
         >
           {options1}
-        </Select>
-      </Form.Item>
+        </Select> */}
+      {/* </Form.Item> */}
     </Form>
   );
 };

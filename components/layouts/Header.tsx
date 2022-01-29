@@ -36,7 +36,7 @@ const menu = (
         Pengaturan
       </a>
     </Menu.Item> */}
-    <Menu.Item
+    {/* <Menu.Item
       style={{ paddingRight: 30, borderTop: "1px solid rgba(0,0,0,.06)" }}
       icon={<LogoutOutlined style={{ color: "#ff4d4f" }} />}
     >
@@ -49,7 +49,7 @@ const menu = (
       >
         Logout
       </a>
-    </Menu.Item>
+    </Menu.Item> */}
   </Menu>
 );
 
@@ -70,7 +70,7 @@ const LayoutHeader = () => {
           <div className="logo">
             <Typography.Title level={4} style={{ marginBottom: 0 }}>
               <span style={{ color: "#3498db" }}>Monitoring</span> Teknisi
-              lapangan
+              Lapangan
             </Typography.Title>
           </div>
         </Col>
