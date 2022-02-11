@@ -3,6 +3,7 @@ import { Layout, Menu } from "antd";
 import { ShopOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import swal from "sweetalert";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -56,11 +57,37 @@ const LayoutSider = () => {
               <a>Data Karyawan</a>
             </Link>
           </Menu.Item>
+          <Menu.Item key="employee_assessment" title="Data Karyawan">
+            <Link href="/assessment">
+              <a>Penilaian Evaluasi</a>
+            </Link>
+          </Menu.Item>
           <Menu.Item
             title="Logout"
             onClick={() => {
-              sessionStorage.clear();
-              router.push("/auth");
+              // sessionStorage.clear();
+              // router.push("/auth");
+              var answer = window.confirm("Are you sure yo want to logout?");
+              if (answer) {
+                //some code
+                sessionStorage.clear();
+                router.push("/auth");
+              } else {
+                //some code
+              }
+
+              // swal({
+
+              //   title: "Do you want to save the changes?",
+
+              // }).then((result) => {
+              //   /* Read more about isConfirmed, isDenied below */
+              //   // if (result.isConfirmed) {
+              //   //   sa("Saved!", "", "success");
+              //   // } else if (result.isDenied) {
+              //   //   Swal.fire("Changes are not saved", "", "info");
+              //   // }
+              // });
             }}
           >
             <Link href="#">

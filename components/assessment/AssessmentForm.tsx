@@ -33,6 +33,7 @@ type Props = {
 };
 const { Title } = Typography;
 const { Option } = Select;
+
 const options = [
   <Option value={"admin"} key={"admin"}>
     Admin
@@ -49,6 +50,7 @@ const options1 = [
     Inactive
   </Option>,
 ];
+const dataa = [1, 2, 3, 4];
 
 function handleChange(value: any) {
   console.log(`Selected: ${value}`);
@@ -73,7 +75,7 @@ const p = {
   },
 };
 
-const EmployeeForm = ({
+const AssessmentForm = ({
   form,
   onFinish,
   onFinishFailed,
@@ -87,8 +89,24 @@ const EmployeeForm = ({
   access,
   is_active,
 }: any) => {
-  useEffect(() => {}, []);
+  const fetchEmployees = async () => {
+    let response = await axios.get("/api/employees");
+    setData(response.data.entriesData);
+    console.log("data", response.data.entriesData);
+    // setData(response.data.entriesData);
+  };
+
+  useEffect(() => {
+    fetchEmployees();
+  }, []);
   const [data, setData] = useState([]);
+  const dataa = [1, 2, 3, 4];
+  const [presentase, setPresentase] = useState(0);
+  const calculate = () => {
+    // setPresentase();
+  };
+
+  const onSelected = () => {};
   return (
     <Form
       layout="vertical"
@@ -101,116 +119,13 @@ const EmployeeForm = ({
       autoComplete="off"
       form={form}
     >
-      {/* personal information */}
-      <Title level={4}>Informasi Pribadi</Title>
-
       <Form.Item
-        label="NIK"
+        label="Karyawan"
         name="code"
         rules={[
           {
             required: true,
-            message: "Masukkan kode pegawai!",
-          },
-        ]}
-      >
-        <Input defaultValue={code} disabled={code == null ? false : true} />
-      </Form.Item>
-
-      <Form.Item
-        label="Nama"
-        name="name"
-        rules={[
-          {
-            required: true,
-            message: "Masukkan nama pegawai!",
-          },
-        ]}
-      >
-        <Input value={name} defaultValue={name} />
-      </Form.Item>
-      <Form.Item
-        label="Email"
-        name="email"
-        rules={[
-          {
-            required: true,
-            message: "Masukkan jobdesk Email",
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        label="Divisi"
-        name="jobdesk"
-        rules={[
-          {
-            required: true,
-            message: "Masukkan jobdesk pegawai!",
-          },
-        ]}
-      >
-        <Input defaultValue={jobdesk} />
-      </Form.Item>
-
-      <Form.Item
-        label="Telepon"
-        name="phone"
-        rules={[
-          {
-            required: true,
-            message: "Masukkan nomor telepon!",
-          },
-        ]}
-      >
-        <Input defaultValue={phone} />
-      </Form.Item>
-      <Form.Item
-        label="Alamat"
-        name="address"
-        rules={[
-          {
-            required: true,
-            message: "Masukkan alamat!",
-          },
-        ]}
-      >
-        <Input.TextArea rows={3} defaultValue={address} />
-      </Form.Item>
-      {/* personal information */}
-      <Title level={4}>Informasi Akun</Title>
-      <Form.Item
-        label="Username"
-        name="username"
-        rules={[
-          {
-            required: true,
-            message: "masukan Username!",
-          },
-        ]}
-      >
-        <Input defaultValue={username} />
-      </Form.Item>
-      <Form.Item
-        label="password"
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: "Masukan Password!",
-          },
-        ]}
-      >
-        <Input.Password defaultValue={password} />
-      </Form.Item>
-      <Form.Item
-        label="Akses"
-        name="access"
-        rules={[
-          {
-            required: true,
-            message: "Pilih Access",
+            message: "Pilih employees",
           },
         ]}
       >
@@ -221,9 +136,61 @@ const EmployeeForm = ({
           onChange={handleChange}
           style={{ width: "100%" }}
         >
-          {options}
+          {data.map((item) => {
+            return (
+              <Option value={`${item["code"]},${item["name"]}`} key={item}>
+                {item["code"]} | {item["name"]}
+              </Option>
+            );
+          })}
         </Select>
       </Form.Item>
+      <Form.Item
+        label="Hari ke-"
+        name="day"
+        rules={[
+          {
+            required: true,
+            message: "Jumlah Hari tidak valid",
+            pattern: new RegExp(/^[0-9]+$/),
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Jumlah Order"
+        name="total_order"
+        rules={[
+          {
+            required: true,
+            message: "Jumlah order tidak valid",
+            pattern: new RegExp(/^[0-9]+$/),
+          },
+        ]}
+      >
+        <Input defaultValue={0} />
+      </Form.Item>
+      <Form.Item
+        label="Hasil Order"
+        name="result"
+        initialValue={presentase}
+        rules={[
+          {
+            required: true,
+            message: "Hasil order tidak valid",
+            pattern: new RegExp(/^[0-9]+$/),
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      {/* <Form.Item label="Persentase (%)" name="persentase">
+        <Input disabled={true} />
+      </Form.Item>  */}
+
       {/* <Form.Item
         label="Status"
         name="is_active"
@@ -233,7 +200,7 @@ const EmployeeForm = ({
             message: "Pilih Status",
           },
         ]}
-      > */}
+      >
       {/* <Select
           size="middle"
           defaultValue={is_active}
@@ -248,4 +215,4 @@ const EmployeeForm = ({
   );
 };
 
-export default EmployeeForm;
+export default AssessmentForm;

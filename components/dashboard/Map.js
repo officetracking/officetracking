@@ -103,7 +103,6 @@ const DashboardM = (props) => {
     doc.text(`NIK :${employeeCode} `, 10, 35);
     doc.setFontSize(10);
     doc.text(`Nama :${employeeName} `, 10, 50);
-    doc.setMa;
 
     doc.autoTable({ html: "#my-table", margin: { top: 50 } });
     checkin.map((value) => {
