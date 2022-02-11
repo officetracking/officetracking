@@ -72,15 +72,16 @@ const AssessmentIndex = () => {
       render: (text) => <a>{text}</a>,
     },
     {
-      title: "Jumlah Orderan",
-      dataIndex: "total_order",
-      key: "total_order",
-    },
-    {
       title: "Hari ke-",
       dataIndex: "day",
       key: "day",
     },
+    {
+      title: "Jumlah Orderan",
+      dataIndex: "total_order",
+      key: "total_order",
+    },
+
     {
       title: "Hasil Progress",
       dataIndex: "result",
