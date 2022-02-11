@@ -39,6 +39,7 @@ const AssessmentCreate: NextPage = () => {
     console.log(requestObject);
     const hide = message.loading("Action in progress..", 0);
     var data = requestObject.code.split(",");
+    var presentase = (requestObject.result / requestObject.total_order) * 100;
 
     setIsLoading(true);
     await axios
@@ -48,8 +49,7 @@ const AssessmentCreate: NextPage = () => {
         day: requestObject.day,
         total_order: requestObject.total_order,
         result: requestObject.result,
-        persentase:
-          (requestObject.result / requestObject.total_order).toFixed(2) + "%",
+        persentase: Math.round(presentase) + "%",
 
         method: "POST",
       })

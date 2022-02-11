@@ -77,6 +77,11 @@ const AssessmentIndex = () => {
       key: "total_order",
     },
     {
+      title: "Hari ke-",
+      dataIndex: "day",
+      key: "day",
+    },
+    {
       title: "Hasil Progress",
       dataIndex: "result",
       key: "result",
