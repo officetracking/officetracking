@@ -72,7 +72,7 @@ const AssessmentIndex = () => {
       render: (text) => <a>{text}</a>,
     },
     {
-      title: "Hari ke-",
+      title: "Hari Ke-",
       dataIndex: "day",
       key: "day",
     },
@@ -147,6 +147,7 @@ const AssessmentIndex = () => {
         // dateFormat(value.date, "dd/mm/yyyy"),
         `${value.code}`,
         `${value.name}`,
+        `${value.day}`,
         `${value.total_order}`,
         `${value.result}`,
         `${value.persentase}`,
@@ -165,7 +166,16 @@ const AssessmentIndex = () => {
 
       thema: "grid",
       margin: { left: 10, right: 10, top: 100 },
-      head: [["NIK", "Nama", "Jumlah Order", "Hasil Progress", "Persentase"]],
+      head: [
+        [
+          "NIK",
+          "Nama",
+          "Hari Ke-",
+          "Jumlah Order",
+          "Hasil Progress",
+          "Persentase",
+        ],
+      ],
       body: pdf,
     });
     window.open(doc.output("bloburl"), "_blank");
