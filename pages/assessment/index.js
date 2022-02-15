@@ -93,36 +93,75 @@ const AssessmentIndex = () => {
       dataIndex: "persentase",
       key: "persentase",
     },
+    {
+      title: "action",
+      key: "action",
+      render: (text, record) => (
+        <div style={{ textAlign: "center" }}>
+          <Space>
+            <Tooltip title="Hapus">
+              <Button
+                type="primary"
+                shape="circle"
+                icon={<DeleteOutlined />}
+                onClick={() => {
+                  onDelete(record.key);
+                }}
+                danger
+              />
+            </Tooltip>
+            <Tooltip title="Ubah">
+              <Button
+                // onClick={() => {
+                //   router.push({
+                //     pathname: `/assessment/edit/[code]`,
+                //     query: {
+                //       nik: record.code,
+                //       name: record.name,
+                //       access: record.access,
+                //       address: record.address,
+                //       is_active: record.is_active,
+                //       jobdesk: record.jobdesk,
+                //       username: record.username,
+                //       phone: record.phone,
+                //       email: record.email,
+                //     },
+                //   });
+                // }}
+                shape="circle"
+                icon={<EditOutlined />}
+              />
+            </Tooltip>
+          </Space>
+        </div>
+      ),
+    },
   ];
 
-  function onDelete(code) {
-    console.log(code);
-    swal({
-      title: "Are you sure?",
-      text: "Data Akan Dihapus",
-      icon: "warning",
-
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        axios
-          .delete(`/api/employees/${code}`)
-          .then((response) => {
-            fetchEmployees();
-            swal("Data di hapus", {
-              icon: "success",
-            });
-          })
-          .catch((err) => {
-            console.log(err);
-            swal("Data tidak berhasil dihapus", {
-              icon: "error",
-            });
+  const onDelete = async (key) => {
+    console.log(key);
+    var answer = window.confirm("Are you sure, data will be deleted?");
+    if (answer) {
+      await axios
+        .delete(`/api/assessment/${key}`)
+        .then((response) => {
+          fetchEmployees();
+          swal("Data di hapus", {
+            icon: "success",
           });
-      } else {
-      }
-    });
-  }
+        })
+
+        .catch((err) => {
+          console.log(err);
+          swal("Data tidak berhasil dihapus", {
+            icon: "error",
+          });
+        });
+    } else {
+      //some code
+    }
+    fetchEmployees();
+  };
 
   const fetchEmployees = async () => {
     let response = await axios.get("/api/assessment");

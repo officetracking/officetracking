@@ -11,7 +11,7 @@ import {
   Upload,
 } from "antd";
 import Head from "next/head";
-import PageLayout from "../../components/layouts/Layout";
+import PageLayout from "../../../components/layouts/Layout";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -19,12 +19,13 @@ import { useState } from "react";
 import { FormInstance } from "rc-field-form";
 import _merge from "lodash/merge";
 import axios from "axios";
-import EmployeeForm from "../../components/employees/EmployeeForm";
-import AssessmentForm from "../../components/assessment/AssessmentForm";
+
+import EmployeeForm from "../../../components/employees/EmployeeForm";
+import AssessmentForm from "../../../components/assessment/AssessmentForm";
 
 const { Content } = Layout;
 
-const AssessmentCreate: NextPage = () => {
+const AssessmentEdit: NextPage = () => {
   const router = useRouter();
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
@@ -205,4 +206,4 @@ const AssessmentCreate: NextPage = () => {
   );
 };
 
-export default AssessmentCreate;
+export default AssessmentEdit;
