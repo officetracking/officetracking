@@ -89,7 +89,7 @@ const AssessmentIndex = () => {
     },
 
     {
-      title: "Presentasi hasil",
+      title: "Persentase hasil",
       dataIndex: "persentase",
       key: "persentase",
     },
@@ -112,22 +112,20 @@ const AssessmentIndex = () => {
             </Tooltip>
             <Tooltip title="Ubah">
               <Button
-                // onClick={() => {
-                //   router.push({
-                //     pathname: `/assessment/edit/[code]`,
-                //     query: {
-                //       nik: record.code,
-                //       name: record.name,
-                //       access: record.access,
-                //       address: record.address,
-                //       is_active: record.is_active,
-                //       jobdesk: record.jobdesk,
-                //       username: record.username,
-                //       phone: record.phone,
-                //       email: record.email,
-                //     },
-                //   });
-                // }}
+                onClick={() => {
+                  router.push({
+                    pathname: `/assessment/edit`,
+                    query: {
+                      key: record.key,
+                      nik: record.code,
+                      name: record.name,
+                      day: record.day,
+                      total_order: record.total_order,
+                      result: record.result,
+                      persentase: record.persentase,
+                    },
+                  });
+                }}
                 shape="circle"
                 icon={<EditOutlined />}
               />
