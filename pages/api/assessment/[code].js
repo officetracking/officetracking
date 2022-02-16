@@ -32,8 +32,8 @@ export default async (req, res) => {
       res.status(200).json();
     } else if (req.method == "PUT") {
       const { id } = await db
-        .collection("employees")
-        .doc(req.body.code)
+        .collection("assesment")
+        .doc(req.body.key)
         .update({
           ...req.body,
         });

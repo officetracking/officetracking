@@ -16,8 +16,8 @@ export default async (req, res) => {
 
       const { id } = await db
         .collection("assesment")
-
-        .add({
+        .doc(req.body.key)
+        .set({
           ...req.body,
           created: new Date().toISOString(),
         });
